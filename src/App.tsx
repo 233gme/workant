@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC } from "react";
+import Container from "react-bootstrap/Container";
+import Table from "react-bootstrap/Table";
+import users from "./data/users.json";
+import Row from "./components/Row";
+import TimesheetModal from "./components/TimesheetsModal";
 
-function App() {
+const App: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="p-3">
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(({ id, firstName, lastName }) => (
+            <Row key={id} id={id} firstName={firstName} lastName={lastName} />
+          ))}
+        </tbody>
+      </Table>
+      <TimesheetModal />
+    </Container>
   );
-}
+};
 
 export default App;
